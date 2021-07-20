@@ -5,12 +5,26 @@ interface UsernameAvailableResponse
 {
   available: boolean;
 }
+
+interface SignupCredentials
+{
+  username: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
+interface SignupResponse {
+  username: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 
 
 export class AuthService {
+
+  rootUrl = 'https://api.angular-email.com';
 
   // dependency injection
   constructor(
@@ -20,15 +34,18 @@ export class AuthService {
   usernameAvailable(username: string) {
    return this.http
      .post<UsernameAvailableResponse>(
-       'https://api.angular-email.com/auth/username',
+       this.rootUrl + '/auth/username',
+      //  `${this.rootUrl}/auth/username`;
        {
         username
       });
   }
 
-  signup(credentials: any) {
-    return this.http.post<any>(
-      'https://api.angular-email.com/auth/signup',
+  //                  this is interface line 9
+  signup(credentials: SignupCredentials) {
+    //                  this is interface line 16
+    return this.http.post<SignupResponse>(
+      this.rootUrl + '/auth/signup',
       credentials
     )
   }
