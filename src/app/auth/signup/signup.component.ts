@@ -3,18 +3,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatchPassword } from '../validators/match-password';
 import { UniqueUsername } from '../validators/unique-username';
 
+import { AuthService } from '../auth.service';
+
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
-  // lines 21 through 24[] is synch
-  // if we want asynch, we need to add on line 21 after , [this.uniqueusername.validate]
-
-  // in order to elimintae a number of request we need to run synch first to meet
-  // all the params then send a single request to api call
 
   authForm = new FormGroup({
     username: new FormControl('', [
@@ -40,11 +37,24 @@ export class SignupComponent implements OnInit {
   //dependency injection
   constructor(
     private matchPassword: MatchPassword,
-    private uniqueUsername: UniqueUsername
+    private uniqueUsername: UniqueUsername,
+    private authService: AuthService
 
   ) { }
 
   ngOnInit(): void {
+  }
+
+  //if line 52 - checks to see if the form or any elements are invalid
+  onSubmit() {
+    if (this.authForm.invalid) {
+      return;
+    }
+    // console.log(this.authForm.value)
+    this.authService.signup(this.authForm.value)
+      .subscribe((response) => {
+      console.log(response)
+    })
   }
 
 }
