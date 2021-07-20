@@ -1,0 +1,37 @@
+<div class="w-50">
+  <div class="row">
+    <h3>Create an Account</h3>
+
+    <form class="ui form" [formGroup]="authForm">
+      <app-input
+            label="Username"
+            inputType="text"
+            [control]="authForm.get('username')">
+      </app-input>
+
+      <app-input
+            label="Password"
+            inputType="password"
+            [control]="authForm.get('password')" >
+      </app-input>
+
+
+      <app-input
+            label="Password Confirmation"
+            inputType="password"
+            [control]="authForm.get('passwordConfirmation')" >
+      </app-input>
+      <hr/>
+      <div>
+        <button class="ui submit button primary">
+          Submit
+        </button>
+        <button class="ui submit button warning">
+          Reset
+        </button>
+      </div>
+
+
+      <pre>{{ authForm.value | json }}</pre>
+    </form>
+  </div>
