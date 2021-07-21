@@ -3,6 +3,32 @@
     <a routerLink="/" class="item">Angular Email</a>
 
     <div class="right menu">
+      <ng-container *ngIf = "signedin$ | async">
+      <a routerLink="/inbox" class="ui item" routerLinkActive="active">Inbox</a>
+      <a routerLink="/signout" class="ui item" routerLinkActive="active">Sign Out</a>
+    </ng-container>
+    <ng-container *ngIf = "!(signedin$ | async)">
+      <a routerLink="/" class="ui item" routerLinkActive="active">Sign In</a>
+      <a routerLink="/signup" class="ui item" routerLinkActive="active">Sign Up</a>
+    </ng-container>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+
+<!--
+  The async pipe is going to allow us to have a reference directly to a promise or an observable any time
+that observable or promise emits or resolves a value, the async pipe right here is going to take that
+value and use it to update some part of our template.
+So in other words, as soon as signed in right here emits a value, the async pipe is going to receive
+that value and it's going to recalculate this.
+-->
+
+<!-- <div class="ui container">
+  <div class="ui secondary pointing menu">
+    <a routerLink="/" class="item">Angular Email</a>
+
+    <div class="right menu">
       <ng-container *ngIf = "signedin">
       <a routerLink="/inbox" class="ui item" routerLinkActive="active">Inbox</a>
       <a routerLink="/signout" class="ui item" routerLinkActive="active">Sign Out</a>
@@ -14,4 +40,4 @@
     </div>
   </div>
   <router-outlet></router-outlet>
-</div>
+</div> -->
