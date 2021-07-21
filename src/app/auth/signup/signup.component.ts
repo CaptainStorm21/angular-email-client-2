@@ -45,8 +45,8 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //if line 52 - checks to see if the form or any elements are invalid
-  onSubmit() {
+  // if line 52 - checks to see if the form or any elements are invalid
+   onSubmit() {
     if (this.authForm.invalid) {
       return;
     }
