@@ -50,11 +50,24 @@ export class SignupComponent implements OnInit {
     if (this.authForm.invalid) {
       return;
     }
-    // console.log(this.authForm.value)
-    this.authService.signup(this.authForm.value)
-      .subscribe((response) => {
-      console.log(response)
-    })
-  }
 
+
+    // console.log(this.authForm.value)
+    this.authService.signup(this.authForm.value).subscribe({
+     next: response => {
+        // navigate to some other route
+      },
+      // complete() {
+      /** nothing goes here it is not important  */
+      // },
+      error: err => {
+        // console.log(err);
+        if (!err.status) {
+          this.authForm.setErrors({
+            
+          })
+        }
+      }
+    });
+  }
 }
