@@ -8,7 +8,7 @@
       <a routerLink="/signout" class="ui item" routerLinkActive="active">Sign Out</a>
     </ng-container>
     <ng-container *ngIf = "!(signedin$ | async)">
-      <a routerLink="/" class="ui item" routerLinkActive="active">Sign In</a>
+      <a routerLink="/" routerLinkActiveOptions = "{exact: true}" class="ui item" routerLinkActive="active">Sign In</a>
       <a routerLink="/signup" class="ui item" routerLinkActive="active">Sign Up</a>
     </ng-container>
     </div>
