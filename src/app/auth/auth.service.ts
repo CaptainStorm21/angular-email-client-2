@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment.prod';
 
 interface UsernameAvailableResponse
 {
@@ -51,8 +52,9 @@ export class AuthService {
     //                  this is interface line 16
     return this.http.post<SignupResponse>(
       this.rootUrl + '/auth/signup',
-      credentials
-    ).pipe(
+      credentials, {
+        withCredentials: true
+      }).pipe(
       // Remember, that tap is essentially just a little thing that allows us to kind of reach in, intercept
       // a value and do something based upon it.
       // It doesn't transform the underlying value or anything like that.
@@ -65,7 +67,9 @@ export class AuthService {
 
   //to check if a person is signed in
   checkAuth() {
-    return this.http.get(`${this.rootUrl}/auth/signedin`)
+    return this.http.get(`${this.rootUrl}/auth/signedin`, {
+      withCredentials: true
+    })
       .pipe(
         tap(response => {
           console.log(response)
@@ -74,3 +78,11 @@ export class AuthService {
   }
 
 }
+
+
+// withCredentilas creates cookies
+// in headers in dev
+// environment
+// network headers
+
+// console should show authentications status : true 
