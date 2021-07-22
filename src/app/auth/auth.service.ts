@@ -61,4 +61,16 @@ export class AuthService {
       })
     );
   }
+
+
+  //to check if a person is signed in
+  checkAuth() {
+    return this.http.get(`${this.rootUrl}/auth/signedin`)
+      .pipe(
+        tap(response => {
+          console.log(response)
+        })
+      );
+  }
+
 }

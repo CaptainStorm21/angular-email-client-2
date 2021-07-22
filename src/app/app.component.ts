@@ -11,7 +11,7 @@ export class AppComponent {
 
   signedin$: BehaviorSubject<boolean>;
 
-  
+
   constructor(
     private authService: AuthService
   ) {
@@ -19,8 +19,12 @@ export class AppComponent {
   }
 
 
-
-
+  ngOnInit() {
+    this.authService.checkAuth()
+      .subscribe(() => {
+        
+      });
+  }
   // signedin = false;
 
   // constructor(
